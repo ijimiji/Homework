@@ -1,6 +1,3 @@
-"""Write a Python program to sort a dictionary by key."""
-
-
 def keys_values_to_dict(keys_values: list[str]) -> dict:
     """Return dict made with grouped keys-values from a given list."""
     dict = {}

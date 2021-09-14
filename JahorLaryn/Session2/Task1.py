@@ -1,6 +1,3 @@
-"""Write a Python program to calculate the length of a string without using the `len` function."""
-
-
 def main():
     string = input("Enter string to count it's contents: ")
     print(string.rindex(string[-1]) + 1)
