@@ -1,8 +1,8 @@
 def main():
-    lower_v_boundary = 4
-    upper_v_boundary = 9
-    lower_h_boundary = 5
-    upper_h_boundary = 9
+    lower_v_boundary = int(input("Enter lower vertical boundary"))
+    upper_v_boundary = int(input("Enter upper vertical boundary"))
+    lower_h_boundary = int(input("Enter lower horizontal boundary"))
+    upper_h_boundary = int(input("Enter upper horizontal boundary"))
     width = upper_h_boundary - lower_h_boundary + 1
     height = upper_v_boundary - lower_v_boundary + 1
     table = [[" "] * (width + 1) for _ in range(height + 1)]
