@@ -1,7 +1,7 @@
 class Sun(object):
     @classmethod
     def inst(cls):
-        if not hasattr(cls, 'instance'):
+        if not hasattr(cls, "instance"):
             cls.instance = super(Sun, cls).__new__(cls)
         return cls.instance
 
