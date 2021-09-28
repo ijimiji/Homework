@@ -2,12 +2,10 @@ from string import ascii_lowercase
 
 class Cipher:
     def __init__(self, keyword):
-        n = len(keyword)
         alphabet = list(ascii_lowercase)
         for char in reversed(keyword):
             alphabet.remove(char)
             alphabet.insert(0, char)
-        print(alphabet)
         self.encoder = {key: char for (char,key) in zip(alphabet, ascii_lowercase)}
         uppercase_translator = {}
         for key, val in self.encoder.items():
