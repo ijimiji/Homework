@@ -1,5 +1,6 @@
 from contextlib import contextmanager
 
+
 @contextmanager
 def file_open(filename, mode):
     f = open(filename, mode)
@@ -8,6 +9,6 @@ def file_open(filename, mode):
     finally:
         f.close()
 
+
 with file_open("bebra.txt", "r") as f:
     print(f.read())
-        
