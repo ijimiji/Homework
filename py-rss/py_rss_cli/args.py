@@ -20,10 +20,10 @@ def parse_args():
 def handle_args(args):
     return {
         "version": print_version_and_exit() if args.version else version,
-        "limit": args.limit if args.limit else 0,
+        "limit": int(args.limit) if args.limit else None,
         "json": True if args.json else False,
         "verbose": True if args.verbose else False,
         "source": args.source
         if args.source
-        else print("error: RSS URL is required") and sys.exit(),
+        else (print("error: RSS URL is required"), sys.exit()),
     }
