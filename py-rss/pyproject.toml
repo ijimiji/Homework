@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "py-rss"
-version = "0.1.0"
+version = "0.2.0"
 description = "Python app for parsing RSS feeds."
 authors = ["Jahor Laryn <mrojahor@gmail.com>"]
 license = "MIT"
