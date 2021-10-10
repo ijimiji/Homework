@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
-from py_rss_cli import parse_args, handle_args, ReadRSS
+from cli import parse_args, handle_args, RSSReader, RSSExporter
 
 
 def main():
     args = parse_args()
     settings = handle_args(args)
-    print(ReadRSS(settings["source"], settings))
+    rss = RSSReader(settings["source"], settings)
+    rss_exporter = RSSExporter(rss)
+    print(rss)
+    for format in settings["export_queue"]:
+        rss_exporter.export(format)
 
 
 if __name__ == "__main__":
