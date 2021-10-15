@@ -1,39 +1,53 @@
-from multiprocessing import Process
-from asyncio import sleep
+from threading import Thread, Lock
+from time import sleep
 
-def wittgenstein():
-    pass
 
-def heidegger():
-    pass
+class Fork:
+    def __init__(self):
+        self.fork = Lock()
 
-def socrates():
-    pass
 
-def kierkegaard():
-    while True:
-        print("1")
-        sleep(100)
+class Philosopher(Thread):
+    def __init__(self, name, left, right):
+        Thread.__init__(self)
+        self.name = name
+        self.left = left
+        self.right = right
+        self.times = 0
 
-def decartes():
-    while True:
-        print("0")
-        sleep(100)
+    def think(self):
+        print(f"{self.name} is thinking")
+        sleep(3)
 
-def main():
-    forks = {
-        1: "available",
-        2: "available",
-        3: "available",
-        4: "available",
-        5: "available",
-    }
-    processes = [
-        Process(target=decartes),
-        Process(target=kierkegaard)
-    ]
-    for process in processes:
-        process.start()
+    def eat(self):
+        ending = "time" if self.times == 1 else "times"
+        print(f"{self.name} started eating")
+        sleep(10)
+        self.times += 1
+        print(f"{self.name} ate {self.times} {ending}")
+
+    def decide(self):
+        while True:
+            self.think()
+            if not self.left.locked():
+                with self.left:
+                    print(f"{self.name} took left fork")
+                    self.think()
+                    if not self.right.locked():
+                        with self.right:
+                            print(f"{self.name} took right fork")
+                            self.eat()
+
+    def run(self):
+        self.decide()
+
 
 if __name__ == "__main__":
-    main()
+    thinkers_list = ["Heidegger", "Kierkegaard", "Plato", "Evola", "Sartre"]
+    forks = [Lock() for i in range(5)]
+    philosophers = [
+        Philosopher(f"{thinkers_list[i]}", forks[i], forks[(i + 1) % 5])
+        for i in range(5)
+    ]
+    for philosopher in philosophers:
+        philosopher.start()
