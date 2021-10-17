@@ -1,5 +1,7 @@
+from cli.cache import cache_rss
 import requests
 import bs4
+import json
 
 
 class RSSReader:
@@ -61,6 +63,10 @@ class RSSReader:
         self.items = self.soup.findAll("item")
         self.channel_title = self.soup.findAll("title")[0].text
 
+    def as_json(self):
+        return json.dumps(self.as_dicts())
+
+    @cache_rss
     def as_dicts(self):
         news_count = self.settings["limit"]
         raw_news = [
