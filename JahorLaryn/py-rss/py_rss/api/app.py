@@ -1,5 +1,8 @@
 from flask import Flask
 from flask import request
+from flask import jsonify
+from flask.wrappers import Response
+
 from werkzeug.exceptions import abort
 from cli import RSSReader
 from datetime import datetime
@@ -20,4 +23,7 @@ def get():
     settings = {"limit": limit, "date": time, "verbose": False, "json": False}
 
     rss = RSSReader(source, settings)
-    return rss.as_json()
+
+    response = jsonify(rss.as_dicts())
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    return response
