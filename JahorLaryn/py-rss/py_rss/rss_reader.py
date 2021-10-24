@@ -24,7 +24,7 @@ def main():
         # Print the RSS feed
         print(rss)
         # Export RSS if any formats are provided
-        export_rss(rss, settings["export_queue"])
+        export_rss(rss.as_dicts(), settings["export_queue"])
 
 
 if __name__ == "__main__":
